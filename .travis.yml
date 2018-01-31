@@ -12,7 +12,7 @@ script: >
     UPSTREAM_REPO_SLUG="kevinwlau%2Fopenliberty.io"
     body='{
       "request": {
-      "message": "Override the commit message: This is an api request from iguides-common",
+      "message": "$TRAVIS_COMMIT_MESSAGE",
       "branch":"development"
       }}'
     curl -s -S -f -X POST \
