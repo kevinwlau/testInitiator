@@ -1,11 +1,9 @@
 #!/usr/bin/env node
-"use strict";
-
-const got = require('got');
+var got = require('got');
 
 console.log('Calling Travis...');
 
-const slug = "kevinwlau%2Fopenliberty.io";
+var slug = "kevinwlau%2Fopenliberty.io";
 
 got.post(`https://api.travis-ci.org/repo/${slug}/requests`, {
     headers: {
