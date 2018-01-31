@@ -1,8 +1,9 @@
-language: ruby
+language: node_js
 rvm:
   - 2.4.1
 
-install: gem install travis --no-rdoc --no-ri
+# install: gem install travis --no-rdoc --no-ri
+install: npm install got
 
 script: node triggerBuild.js
 sudo: false
