@@ -4,7 +4,4 @@ rvm:
 
 install: gem install travis --no-rdoc --no-ri
 
-before_script:
-  - chmod +x ./triggerBuild.sh
-
 script: ./triggerBuild.sh
