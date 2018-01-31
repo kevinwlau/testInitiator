@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
-const shell = require('shelljs'),
-    path = require('path'),
-    got = require('got');
+const got = require('got');
 
 console.log('Calling Travis...');
 
