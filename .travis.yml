@@ -10,10 +10,11 @@ script: >
     # travis login --skip-completion-check --org --github-token "$GITHUB_TRAVIS_TOKEN";
     export TRAVIS_ACCESS_TOKEN=`travis login --skip-completion-check --org --github-token "$GITHUB_TRAVIS_TOKEN" && travis token`;
     UPSTREAM_REPO_SLUG="kevinwlau%2Fopenliberty.io"
+    echo $TRAVIS_COMMIT_MESSAGE
     body='{
       "request": {
       "message": "$TRAVIS_COMMIT_MESSAGE",
-      "branch":"development"
+      "branch":"test"
       }}'
     curl -s -S -f -X POST \
       -H "Content-Type: application/json" \
