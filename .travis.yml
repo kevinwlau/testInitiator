@@ -4,5 +4,5 @@ rvm:
 
 install: gem install travis --no-rdoc --no-ri
 
-script: ./triggerBuild.js
+script: node triggerBuild.js
 sudo: false
