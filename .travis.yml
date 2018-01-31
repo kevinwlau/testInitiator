@@ -7,8 +7,8 @@ script: >
   if [ ! -z $GITHUB_TRAVIS_TOKEN ]; then
     echo "Start requesting a travis build from upstream repository...";
     # Doesn't use --debug on `travis login`.  --debug will show the github token
-    travis login --skip-completion-check --org --github-token "$GITHUB_TRAVIS_TOKEN";
-    export TRAVIS_ACCESS_TOKEN=`travis token`;
+    # travis login --skip-completion-check --org --github-token "$GITHUB_TRAVIS_TOKEN";
+    export TRAVIS_ACCESS_TOKEN=`travis login --skip-completion-check --org --github-token "$GITHUB_TRAVIS_TOKEN" && travis token`;
     UPSTREAM_REPO_SLUG="kevinwlau%2Fopenliberty.io"
     body='{
       "request": {
