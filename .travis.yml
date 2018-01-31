@@ -13,7 +13,7 @@ script: >
     echo $TRAVIS_COMMIT_MESSAGE
     body='{
       "request": {
-      "message": "$(echo $TRAVIS_COMMIT_MESSAGE)",
+      "message": "Override from testInitiator commit: $TRAVIS_COMMIT_MESSAGE",
       "branch":"test"
       }}'
     curl -s -S -f -X POST \
