@@ -6,7 +6,7 @@ if [ ! -z $GITHUB_TRAVIS_TOKEN ]; then
     echo $TRAVIS_COMMIT_MESSAGE
     body='{
       "request": {
-      "message": "Override from testInitiator commit: ${TRAVIS_COMMIT_MESSAGE}",
+      "message": "Override from testInitiator commit: ' + $TRAVIS_COMMIT_MESSAGE + '",
       "branch":"test"
       }}'
     curl -s -S -f -X POST \
