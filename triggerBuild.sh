@@ -21,4 +21,3 @@ if [ ! -z $GITHUB_TRAVIS_TOKEN ]; then
   else
     echo "ERROR: Missing Github token.  Cannot request a travis build for upstream repository...";
   fi
-sudo: false # route your build to the container-based infrastructure for a faster build
