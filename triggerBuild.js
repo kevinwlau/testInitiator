@@ -15,7 +15,7 @@ got.post(`https://api.travis-ci.org/repo/${slug}/requests`, {
     body: JSON.stringify({
         request: {
         message: `Override commit: ${process.env.TRAVIS_COMMIT_MESSAGE}`,
-        branch: 'source',
+        branch: 'test',
         },
     }),
 })
