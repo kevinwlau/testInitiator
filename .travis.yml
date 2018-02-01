@@ -1,4 +1,7 @@
 language: node_js
+node_js:
+  - "iojs"
+  - "7"
 rvm:
   - 2.4.1
 
