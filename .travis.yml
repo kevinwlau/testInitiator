@@ -2,8 +2,32 @@ language: ruby
 rvm:
 - 2.4.1
 install: gem install travis --no-rdoc --no-ri
-script: "./buildTestWebsite.sh"
 sudo: false
 env:
   global:
     secure: Eymprw0GiqwN9GWaDkj/y5Q/KnmGCaKEWxnrTzBDAyQWrCNIV2fyNyAvhrjTuGN4LeWgeC51Y7Urt1JAVz5b4aR+7IMwVc033AXoI84Tk7QvR7acmwjP+Wnka9aY3p66lUGCje2yGDeX5WoB8sdxNvIHvk8FC7xOxLSL+0Rel5F1uS+muzGQp4jbE3pauDss1RFYgTTUid9mtIDlcOx7gfmFa2OGNOIttASVoqRvvGZSW2mK1OUYWokP3gV1Ng9gM6fQsixgTXpXVjJhQRO7OE1/lOXuEAkUbXhIJdMaE8pvgzm3dB+fLii3MOXqtkYOkNPLKYFamx9PeqHvaP5sozkXa1d+E4IGF4ridkYbR5TeQkn6NfnMmkZXSkoxopMGAN2rUNdjPCgeHHOTaClt7HVGZaweTlnmvREM9B5GkCoP3TmURteYXZAkSLbLNIYcXn2cvx0FZ5ImYQHsyF6LtTdUMBwmM/K/PLPx4kD8c963LaZtEcZwzmscd7zshP8dtms8nhgDiOb3Km3GOzu7Q8F4529C8EMrZSW61lVi4OT2y3qewQOk7BD1ZNtUyGbrkugSOQY69OjnidYXaDwp+3RmfWh9xhXk3zSRIZkyeqLHxX0bfLJAlhkXjXcb5FHd5eeUoHRDkUQExd2WkY9IKTiBk8S+66dMd2v2wEjF4vw=
+script: >
+  if [ ! -z $GITHUB_TRAVIS_TOKEN ]; then
+    echo "Start requesting a travis build from upstream repository...";
+    # Doesn't use --debug on `travis login`.  --debug will show the github token
+    # travis login --skip-completion-check --org --github-token "$GITHUB_TRAVIS_TOKEN";
+    export TRAVIS_ACCESS_TOKEN=`travis login --skip-completion-check --org --github-token "$GITHUB_TRAVIS_TOKEN" && travis token`;
+    UPSTREAM_REPO_SLUG="kinueng%2Fopenliberty.io"
+    echo $TRAVIS_COMMIT_MESSAGE
+    body='{
+        "request": {
+            "message": "Build request from static guide",
+            "branch":"test"
+        }}'
+    curl -s -S -f -X POST \
+        -H "Content-Type: application/json" \
+        -H "Accept: application/json" \
+        -H "Travis-API-Version: 3" \
+        -H "Authorization: token $TRAVIS_ACCESS_TOKEN" \
+        -d "$body" \
+        https://api.travis-ci.org/repo/$UPSTREAM_REPO_SLUG/requests
+
+    echo "SUCCESS: Completed request for travis build from upstream repository...";
+  else
+    echo "ERROR: Missing Github token.  Cannot request a travis build for upstream repository...";
+  fi
