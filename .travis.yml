@@ -17,7 +17,7 @@ script: >
     body='{
         "request": {
             "message": "Build request from static guide",
-            "branch":"test"
+            "branch":"development"
         }}'
     curl -s -S -f -X POST \
         -H "Content-Type: application/json" \
